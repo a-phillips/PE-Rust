@@ -1,16 +1,10 @@
+fn get_even_fibs(lim:i64, a: i64, b: i64) -> i64{
+    let c: i64 = a + b;
+    if c > lim { return 0; }
+    else if c%2==0 { return c + get_even_fibs(lim, b, c); }
+    else { return get_even_fibs(lim, b, c); }
+}
+
 fn main(){
-    let mut a: int = 1;
-    let mut b: int = 1;
-    let mut c: int = 1;
-    let mut total: int = 0;
-    let lim: int = 4000000;
-    while b < lim{
-        if (b%2) == 0{
-            total = total + b
-        }
-        c = a+b;
-        a = b;
-        b = c;
-    }
-    println!("{}",total);
+    println!("{}",get_even_fibs(4000000, 1, 1));
 }
