@@ -1,9 +1,17 @@
 fn main(){
-    let mut total = 0i;
-    for x in range(1i, 1000i){
-        if (x%3 == 0) || (x%5 == 0){
-            total = total + x
-        }
-    }
-    println!("{}",total);
+    println!("{}",get_answer(1000));
 }
+
+fn get_answer(num: int) -> int{
+    if num == 1 {
+        return 0i;
+    }
+    else if (num%3==0) || (num%5==0){
+        return num + get_answer(num-1);
+    }
+    else{
+        return get_answer(num-1);
+    }
+}
+
+
