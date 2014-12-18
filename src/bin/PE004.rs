@@ -4,27 +4,19 @@ fn is_palindrome(num: int) -> bool{
     return rev_num_str == num_str;
 }
 
-fn main(){
-    let mut pals = Vec::new();
-    let mut i: int = 999i * 999i;
-    while i > (100i*100i) {
+fn get_answer() -> int{
+    for i in range(100i*100i,999i*999i).rev(){
         if is_palindrome(i) {
-            pals.push(i);
-        };
-        i = i - 1;
-    }
-    println!("pals found");
-    let mut found: bool = false;
-    for pal in pals.iter() {
-        for div in range(100, 999) {
-            if (*pal%div) == 0 && (*pal/div) < 1000 {
-                found = true;
-                break;
-            };
+            for div in range(100, 999){
+                if (i%div==0) && (i/div<1000){
+                    return i;
+                }
+            }
         }
-        if found {
-            println!("{}", pal);
-            break;
-        };
     }
+    return 0;
+}
+
+fn main(){
+    println!("{}", get_answer());
 }
