@@ -1,4 +1,4 @@
-//NOT CORRECT - need to come back to it
+//Finally got it right.
 
 use std::io::BufferedReader;
 use std::io::File;
@@ -21,9 +21,10 @@ fn open_file(fp:&str) -> String {
 fn name_score(name:&str) -> uint {
 	let mut sum = 0u;
 	for a in name.chars() {
+		//println!("{}, {}", a, a.to_digit(36));
 		match a.to_digit(36) {
-			Some(x) => sum += (x-10),
-			Non		=> sum += 0
+			Some(x) => sum += x-9,
+			None	=> sum += 0
 			}
 	}
 	sum
@@ -32,10 +33,12 @@ fn name_score(name:&str) -> uint {
 fn main() {
 	let name_str:String = open_file("src/PE022.txt");
 	//How do I get rid of the ' " 's?
-	let names:Vec<&str> = name_str.split_str(",").collect();
+	let mut names:Vec<&str> = name_str.split_str(",").collect();
+	names.sort();
 	let mut sum = 0u;
+	//let names_test = ["COLIN"];
 	for it in names.iter().enumerate() {
-		println!("{}, {}", it.0, name_score(*it.1));
+		sum += (it.0+1)*name_score(*it.1);
 	}
 	println!("{}", sum);
 }
